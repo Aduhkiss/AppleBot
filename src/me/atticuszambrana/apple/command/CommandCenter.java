@@ -3,11 +3,13 @@ package me.atticuszambrana.apple.command;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.javacord.api.entity.message.MessageAuthor;
 import org.javacord.api.event.message.MessageCreateEvent;
 import org.javacord.api.listener.message.MessageCreateListener;
 
 import me.atticuszambrana.apple.AppleBot;
 import me.atticuszambrana.apple.command.impl.info.HelpCommand;
+import me.atticuszambrana.apple.util.LogUtil;
 
 public class CommandCenter implements MessageCreateListener {
 	/*
@@ -34,10 +36,12 @@ public class CommandCenter implements MessageCreateListener {
 	public void onMessageCreate(MessageCreateEvent event) {
 		String prefix = apple.getConfig().getPrefix();
 		String input = event.getMessageContent();
+		MessageAuthor user = event.getMessageAuthor();
 		
 		for(Command c : getCommands()) {
 			if(input.startsWith(prefix + c.getName())) {
 				// Log the execution of a command
+				LogUtil.logCommand(user.getName() + " executed command " + c.getName());
 				c.execute(event);
 			}
 		}

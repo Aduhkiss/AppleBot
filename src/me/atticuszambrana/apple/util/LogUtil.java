@@ -21,9 +21,14 @@ public class LogUtil {
 		print(message, LogType.NORMAL);
 	}
 	
+	public static void logCommand(String message) {
+		print(message, LogType.COMMAND);
+	}
+	
 	public enum LogType {
 		NORMAL,
 		DEBUG,
+		COMMAND,
 		ERROR,
 	}
 }

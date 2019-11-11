@@ -4,6 +4,7 @@ import com.google.gson.Gson;
 
 import me.atticuszambrana.apple.data.Config;
 import me.atticuszambrana.apple.util.ConfigReader;
+import me.atticuszambrana.apple.util.StringUtil;
 
 public class Start {
 	
@@ -13,7 +14,14 @@ public class Start {
 	public static void main(String[] args) {
 		System.out.println("Starting AppleBot...");
 		System.out.println("Coded by Atticus Zambrana");
-		//TODO: Any arguments? Such as debug mode?
+		
+		// Just convert all of the arguments passed in, to a string
+		String arguments = StringUtil.combine(args, 0);
+		
+		boolean debug = false;
+		if(arguments.indexOf("--debug") >=0 ) {
+			debug = true;
+		}
 		
 		// Get Gson
 		Gson g = new Gson();
@@ -33,7 +41,7 @@ public class Start {
 		
 		System.out.println("Starting Apple...");
 		// Lets turn on Debug mode so we can see debug messages
-		apple = new AppleBot(activeConfig, true);
+		apple = new AppleBot(activeConfig, debug);
 	}
 	
 	public static AppleBot getApple() {

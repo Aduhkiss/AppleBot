@@ -4,5 +4,6 @@
 	<classpathentry kind="src" path="src"/>
 	<classpathentry kind="lib" path="C:/Users/Atticus Zambrana/Downloads/javacord-3.0.4-shaded.jar"/>
 	<classpathentry kind="lib" path="C:/Users/Atticus Zambrana/Documents/Libraries/gson-2.3.1(1).jar"/>
+	<classpathentry kind="lib" path="C:/Users/Atticus Zambrana/Documents/Libraries/mysql-connector-java-8.0.9-rc.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

@@ -5,6 +5,7 @@ import org.javacord.api.DiscordApiBuilder;
 
 import me.atticuszambrana.apple.command.CommandCenter;
 import me.atticuszambrana.apple.data.Config;
+import me.atticuszambrana.apple.database.Database;
 import me.atticuszambrana.apple.util.LogUtil;
 
 public class AppleBot {
@@ -15,6 +16,8 @@ public class AppleBot {
 	
 	private CommandCenter commandCenter;
 	
+	private Database database;
+	
 	public AppleBot(Config config, boolean debugMode) {
 		LogUtil.log("Starting Command Center...");
 		commandCenter = new CommandCenter(this);
@@ -23,6 +26,9 @@ public class AppleBot {
 		this.config = config;
 		this.debugMode = debugMode;
 		api = new DiscordApiBuilder().setToken(config.getToken()).login().join();
+		
+		LogUtil.log("Setting up the Database...");
+		database = new Database(this);
 		
 		// Register the message handlers
 		api.addMessageCreateListener(commandCenter);
@@ -44,5 +50,8 @@ public class AppleBot {
 	}
 	public CommandCenter getCommandCenter() {
 		return commandCenter;
+	}
+	public Database getDatabase() {
+		return database;
 	}
 }
