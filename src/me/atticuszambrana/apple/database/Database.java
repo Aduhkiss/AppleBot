@@ -66,6 +66,7 @@ public class Database {
 	private void applyFix() {
 		Thread t = new Thread() {
 			public void run() {
+				Thread.currentThread().setName("Database Keep Alive Thread");
 				try {
 					ResultSet result = connection.createStatement().executeQuery("SELECT * FROM `LicenseKeys`");
 				} catch (SQLException e) {
