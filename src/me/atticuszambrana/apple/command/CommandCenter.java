@@ -9,6 +9,8 @@ import org.javacord.api.listener.message.MessageCreateListener;
 
 import me.atticuszambrana.apple.AppleBot;
 import me.atticuszambrana.apple.command.impl.info.HelpCommand;
+import me.atticuszambrana.apple.command.impl.marriage.MarriageStatusCommand;
+import me.atticuszambrana.apple.command.impl.membership.RedeemCommand;
 import me.atticuszambrana.apple.util.LogUtil;
 
 public class CommandCenter implements MessageCreateListener {
@@ -28,7 +30,15 @@ public class CommandCenter implements MessageCreateListener {
 	
 	public void register() {
 		// Register commands here
+		
+		// Information Commands
 		commands.add(new HelpCommand());
+		
+		// Membership Commands
+		commands.add(new RedeemCommand());
+		
+		// Marriage Commands
+		commands.add(new MarriageStatusCommand());
 	}
 
 	// This method will be ran when the bot parses that a message has been passed into the server
@@ -40,6 +50,7 @@ public class CommandCenter implements MessageCreateListener {
 		
 		for(Command c : getCommands()) {
 			if(input.startsWith(prefix + c.getName())) {
+				//TODO: Fix the command detection system to not fuck stuff up
 				// Log the execution of a command
 				LogUtil.logCommand(user.getName() + " executed command " + c.getName());
 				c.execute(event);

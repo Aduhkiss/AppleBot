@@ -1,7 +1,5 @@
 package me.atticuszambrana.apple.util;
 
-import java.util.regex.PatternSyntaxException;
-
 public class StringUtil {
 	
 	/*
@@ -21,13 +19,8 @@ public class StringUtil {
 		return builder.toString();
 	}
 	
-	public static String[] toArray(String string) {
-		String[] splitArray = null;
-		try {
-			splitArray = string.split("\\\\s+");
-		} catch(PatternSyntaxException ex) {
-		}
-		return splitArray;
+	public static String[] toArray(String in) {
+		return in.split(" ");
 	}
 	
 	public static String combine(String[] arr, int startPos) {

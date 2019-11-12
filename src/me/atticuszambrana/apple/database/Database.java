@@ -39,9 +39,6 @@ public class Database {
 		// Where if we dont interact with it for a while, we drop the connection
 		// Just make sure to not drop the connection
 		
-		// The fix
-		applyFix();
-		
 		try {
 			if(connection != null && !connection.isClosed()) {
 				return;
@@ -60,6 +57,9 @@ public class Database {
 			ex.printStackTrace();
 			System.exit(1);
 		}
+		
+		// The fix
+		applyFix();
 	}
 	
 	// A fix for that bug mentioned above
@@ -67,7 +67,7 @@ public class Database {
 		Thread t = new Thread() {
 			public void run() {
 				try {
-					ResultSet result = connection.createStatement().executeQuery("SELECT *");
+					ResultSet result = connection.createStatement().executeQuery("SELECT * FROM `LicenseKeys`");
 				} catch (SQLException e) {
 				}
 				
