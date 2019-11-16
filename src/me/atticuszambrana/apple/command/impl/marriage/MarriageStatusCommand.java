@@ -50,7 +50,6 @@ public class MarriageStatusCommand extends Command {
 		embed.setTitle("Your Marriage Status");
 		
 		event.getChannel().sendMessage(embed);
-		MarriageManager.updateMarriages();
 		return;
 	}
 

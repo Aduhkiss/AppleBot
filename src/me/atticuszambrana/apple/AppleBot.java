@@ -53,8 +53,29 @@ public class AppleBot {
 		
 		updateActivity();
 		
-		LogUtil.log("Updating Marriages...");
-		MarriageManager.updateMarriages();
+//		LogUtil.log("Updating Marriages...");
+//		MarriageManager.updateMarriages();
+		
+		updateMarriageTimer();
+	}
+	
+	private void updateMarriageTimer() {
+		new Thread() {
+			public void run() {
+				Thread.currentThread().setName("Marriage Updater Thread");
+				
+				try {
+					Thread.sleep(1000 * 15);
+				} catch (InterruptedException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				
+				MarriageManager.updateMarriages();
+				
+				updateMarriageTimer();
+			}
+		}.start();
 	}
 	
 	private void updateActivity() {

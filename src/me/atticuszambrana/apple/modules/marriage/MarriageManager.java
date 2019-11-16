@@ -27,7 +27,6 @@ public class MarriageManager {
 	 * @return
 	 */
 	public static boolean isMarriedTogether(String id_one, String id_two) {
-		updateMarriages();
 		for(Marriage m : marriages) {
 			if(m.getPartnerOne().equals(id_one) && m.getPartnerTwo().equals(id_two)) {
 				return true;
@@ -36,6 +35,7 @@ public class MarriageManager {
 				return true;
 			}
 		}
+		updateMarriages();
 		return false;
 	}
 	
@@ -45,7 +45,6 @@ public class MarriageManager {
 	 * @return
 	 */
 	public static boolean isMarried(String id) {
-		updateMarriages();
 		for(Marriage m : marriages) {
 			if(m.getPartnerOne().equals(id)) {
 				return true;
@@ -54,11 +53,11 @@ public class MarriageManager {
 				return true;
 			}
 		}
+		updateMarriages();
 		return false;
 	}
 	
 	public static boolean isMarried(String id, String server) {
-		updateMarriages();
 		for(Marriage m : marriages) {
 			if(m.getPartnerOne().equals(id)) {
 				if(m.getServerID().equals(server)) {
@@ -71,6 +70,7 @@ public class MarriageManager {
 				}
 			}
 		}
+		updateMarriages();
 		return false;
 	}
 	
@@ -81,7 +81,6 @@ public class MarriageManager {
 	 * @return
 	 */
 	public static String getPartner(String id) {
-		updateMarriages();
 		if(isMarried(id) == false) {
 			return null;
 		}
@@ -94,6 +93,7 @@ public class MarriageManager {
 				partner = m.getPartnerOne();
 			}
 		}
+		updateMarriages();
 		return partner;
 	}
 	
@@ -103,7 +103,6 @@ public class MarriageManager {
 	 * @return
 	 */
 	public static Marriage getMarriage(String id) {
-		updateMarriages();
 		for(Marriage m : marriages) {
 			// Why the fuck was I using &&????? THAT WOULD MEAN THAT YOU WOULD HAVE TO BE PARTNER ONE AND PARNER TWO
 			// WHICH MAKES ABSOLUTELY NO FUCKING SENSE BUT OK
@@ -111,6 +110,7 @@ public class MarriageManager {
 				return m;
 			}
 		}
+		updateMarriages();
 		return null;
 	}
 	

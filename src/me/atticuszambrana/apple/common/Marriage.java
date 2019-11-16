@@ -105,6 +105,22 @@ public class Marriage {
 		}.start();
 	}
 	
+	public void remove() {
+		new Thread() {
+			public void run() {
+				try {
+					
+					Database db = Start.getApple().getDatabase();
+					
+					db.getConnection().createStatement().executeUpdate("DELETE FROM `Marriages` WHERE `ID` = " + ID + ";");
+					
+				} catch(SQLException ex) {
+					ex.printStackTrace();
+				}
+			}
+		}.start();
+	}
+	
 	public void save() {
 		new Thread() {
 			public void run() {
