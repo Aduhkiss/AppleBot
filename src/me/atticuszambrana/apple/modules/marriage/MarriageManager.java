@@ -28,6 +28,15 @@ public class MarriageManager {
 	 */
 	public static boolean isMarriedTogether(String id_one, String id_two) {
 		updateMarriages();
+		for(Marriage m : marriages) {
+			if(m.getPartnerOne().equals(id_one) && m.getPartnerTwo().equals(id_two)) {
+				return true;
+			}
+			if(m.getPartnerOne().equals(id_two) && m.getPartnerTwo().equals(id_one)) {
+				return true;
+			}
+		}
+		return false;
 	}
 	
 	/**
@@ -37,6 +46,32 @@ public class MarriageManager {
 	 */
 	public static boolean isMarried(String id) {
 		updateMarriages();
+		for(Marriage m : marriages) {
+			if(m.getPartnerOne().equals(id)) {
+				return true;
+			}
+			if(m.getPartnerTwo().equals(id)) {
+				return true;
+			}
+		}
+		return false;
+	}
+	
+	public static boolean isMarried(String id, String server) {
+		updateMarriages();
+		for(Marriage m : marriages) {
+			if(m.getPartnerOne().equals(id)) {
+				if(m.getServerID().equals(server)) {
+					return true;
+				}
+			}
+			if(m.getPartnerTwo().equals(id)) {
+				if(m.getServerID().equals(server)) {
+					return true;
+				}
+			}
+		}
+		return false;
 	}
 	
 	/**
@@ -50,6 +85,16 @@ public class MarriageManager {
 		if(isMarried(id) == false) {
 			return null;
 		}
+		String partner = null;
+		for(Marriage m : marriages) {
+			if(m.getPartnerOne().equals(id)) {
+				partner = m.getPartnerTwo();
+			}
+			if(m.getPartnerTwo().equals(id)) {
+				partner = m.getPartnerOne();
+			}
+		}
+		return partner;
 	}
 	
 	/**
@@ -60,7 +105,9 @@ public class MarriageManager {
 	public static Marriage getMarriage(String id) {
 		updateMarriages();
 		for(Marriage m : marriages) {
-			if(m.getPartnerOne().equals(id) && m.getPartnerTwo().equals(id)) {
+			// Why the fuck was I using &&????? THAT WOULD MEAN THAT YOU WOULD HAVE TO BE PARTNER ONE AND PARNER TWO
+			// WHICH MAKES ABSOLUTELY NO FUCKING SENSE BUT OK
+			if(m.getPartnerOne().equals(id) || m.getPartnerTwo().equals(id)) {
 				return m;
 			}
 		}
@@ -100,7 +147,20 @@ public class MarriageManager {
 			}
 		}.start();
 	}
+	
+	/**
+	 * Will save all current marriages that we have locally, into the database
+	 */
+	public static void saveAllMarriages() {
+		for(Marriage m : marriages) {
+			m.save();
+		}
+	}
 
+	/**
+	 * Will return the list of marriages that we have saved locally
+	 * @return
+	 */
 	public static List<Marriage> getMarriages() {
 		return marriages;
 	}

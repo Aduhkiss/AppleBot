@@ -31,7 +31,14 @@ public class AppleBot {
 		LogUtil.log("Getting everything ready...");
 		this.config = config;
 		this.debugMode = debugMode;
-		api = new DiscordApiBuilder().setToken(config.getToken()).login().join();
+		
+		// Fixing this bug...
+		try {
+			api = new DiscordApiBuilder().setToken(config.getToken()).login().join();
+		} catch(IllegalStateException ex) {
+			LogUtil.error("There was an error while connecting to the Discord API. Is your bot's login token correct? (Will Print Stack Trace)");
+			ex.printStackTrace();
+		}
 		
 		LogUtil.log("Setting up the Database...");
 		database = new Database(this);
@@ -53,6 +60,8 @@ public class AppleBot {
 			public void run() {
 				Thread.currentThread().setName("Activity Switch Thread");
 				String prefix = getConfig().getPrefix();
+				
+				// In a future update I want to show how many servers are using the bot and stuff
 				
 				if(activitySlide == 0) {
 					getAPI().updateActivity(ActivityType.PLAYING, prefix + "help for commands.");
