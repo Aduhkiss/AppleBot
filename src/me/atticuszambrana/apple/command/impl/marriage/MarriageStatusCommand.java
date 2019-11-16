@@ -21,18 +21,21 @@ public class MarriageStatusCommand extends Command {
 
 	@Override
 	public void execute(MessageCreateEvent event) {
-		MarriageManager.updateMarriages();
 		Marriage m = MarriageManager.getMarriage(event.getMessageAuthor().getIdAsString());
 		DiscordApi api = Start.getApple().getAPI();
 		
-		EmbedBuilder embed = new EmbedBuilder();
-		
-		for(Marriage ma : MarriageManager.getMarriages()) {
-			System.out.println(ma.getID());
+		// Simple way to check if you are not married
+		if(!MarriageManager.isMarried(event.getMessageAuthor().getIdAsString())) {
+			EmbedBuilder e = new EmbedBuilder();
+			e.setTitle("You are not married to anyone!");
+			e.setColor(Color.RED);
+			e.setDescription("Sorry, but you are not married to anyone!");
+			event.getChannel().sendMessage(e);
+			return;
 		}
 		
-		System.out.println(m.getPartnerOne());
-		
+		EmbedBuilder embed = new EmbedBuilder();
+
 		embed.setColor(Color.RED);
 		try {
 			embed.addField("Partner One", api.getUserById(m.getPartnerOne()).get().getName());
@@ -47,6 +50,7 @@ public class MarriageStatusCommand extends Command {
 		embed.setTitle("Your Marriage Status");
 		
 		event.getChannel().sendMessage(embed);
+		MarriageManager.updateMarriages();
 		return;
 	}
 

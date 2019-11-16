@@ -8,6 +8,7 @@ import me.atticuszambrana.apple.command.CommandCenter;
 import me.atticuszambrana.apple.data.Config;
 import me.atticuszambrana.apple.database.Database;
 import me.atticuszambrana.apple.modules.marriage.MarriageManager;
+import me.atticuszambrana.apple.modules.marriage.MarriageMessageListener;
 import me.atticuszambrana.apple.util.AtticusThread;
 import me.atticuszambrana.apple.util.LogUtil;
 
@@ -45,6 +46,7 @@ public class AppleBot {
 		
 		// Register the message handlers
 		api.addMessageCreateListener(commandCenter);
+		api.addMessageCreateListener(new MarriageMessageListener());
 		
 		// Then we want to give the user a URL to add the bot to their server
 		LogUtil.log("You may invite this bot into your server with this link: " + api.createBotInvite());

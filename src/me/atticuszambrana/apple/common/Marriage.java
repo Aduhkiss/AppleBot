@@ -93,7 +93,9 @@ public class Marriage {
 				try {
 					Database db = Start.getApple().getDatabase();
 					
-					db.getConnection().createStatement().executeUpdate("INSERT INTO `Marriages` (`STATUS`, `SERVER_ID`, `PARTNER_ONE`, `PARTNER_TWO`) VALUES (`" + STATUS + "`, `" + SERVER_ID + "`, `" + PARTNER_ONE + "`, `" + PARTNER_TWO + "`);");
+					//System.out.println("Debug: " + "INSERT INTO `Marriages` (`STATUS`, `SERVER_ID`, `PARTNER_ONE`, `PARTNER_TWO`) VALUES (`" + STATUS.toString().toUpperCase() + "`, `" + SERVER_ID + "`, `" + PARTNER_ONE + "`, `" + PARTNER_TWO + "`);");
+					
+					db.getConnection().createStatement().executeUpdate("INSERT INTO `Marriages` (`STATUS`, `SERVER_ID`, `PARTNER_ONE`, `PARTNER_TWO`) VALUES ('" + STATUS.toString().toUpperCase() + "', '" + SERVER_ID + "', '" + PARTNER_ONE + "', '" + PARTNER_TWO + "');");
 					
 					// The thing was actually made and inserted into the database yay!
 				} catch(SQLException ex) {
