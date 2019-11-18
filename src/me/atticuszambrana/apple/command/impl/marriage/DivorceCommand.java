@@ -41,7 +41,16 @@ public class DivorceCommand extends Command {
 			embed.setColor(Color.RED);
 			embed.setTitle("Your spouse has divorced you!");
 			embed.setDescription("Your spouse " + event.getMessageAuthor().getName() + ", has chosen to divorce you. Sorry for the sad news.");
-			event.getChannel().sendMessage(embed);
+			
+			target.sendMessage(embed);
+			
+			EmbedBuilder idiot = new EmbedBuilder();
+			
+			idiot.setColor(Color.RED);
+			idiot.setTitle("You have divorced your spouse!");
+			idiot.setDescription("You have chosen to divorce your spouse, " + target.getName() + "! I always knew that marriage was never going to work.");
+			
+			event.getChannel().sendMessage(idiot);
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

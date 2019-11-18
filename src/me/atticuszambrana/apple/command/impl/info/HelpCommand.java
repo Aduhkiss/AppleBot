@@ -18,6 +18,14 @@ public class HelpCommand extends Command {
 	public void execute(MessageCreateEvent event) {
 		String prefix = Start.getApple().getConfig().getPrefix();
 		
+		EmbedBuilder pub = new EmbedBuilder();
+		
+		pub.setColor(Color.GREEN);
+		pub.setTitle("I sent you the commands!");
+		pub.setDescription("A list of all of my commands have been direct messaged to you!");
+		
+		event.getChannel().sendMessage(pub);
+		
 		EmbedBuilder start = new EmbedBuilder();
 		start.addField("My Prefix", prefix);
 		
@@ -25,7 +33,7 @@ public class HelpCommand extends Command {
 			EmbedBuilder embed = new EmbedBuilder();
 			embed.addField(c.getName(), c.getDescription());
 			embed.setColor(Color.GREEN);
-			event.getChannel().sendMessage(embed);
+			event.getMessageAuthor().asUser().get().sendMessage(embed);
 		}
 	}
 }

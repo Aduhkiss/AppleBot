@@ -9,6 +9,7 @@ import me.atticuszambrana.apple.data.Config;
 import me.atticuszambrana.apple.database.Database;
 import me.atticuszambrana.apple.modules.marriage.MarriageManager;
 import me.atticuszambrana.apple.modules.marriage.MarriageMessageListener;
+import me.atticuszambrana.apple.modules.namegen.NameGenerator;
 import me.atticuszambrana.apple.util.AtticusThread;
 import me.atticuszambrana.apple.util.LogUtil;
 
@@ -19,6 +20,7 @@ public class AppleBot {
 	private boolean debugMode;
 	
 	private CommandCenter commandCenter;
+	private NameGenerator nameGenerator;
 	
 	private Database database;
 	
@@ -43,6 +45,9 @@ public class AppleBot {
 		
 		LogUtil.log("Setting up the Database...");
 		database = new Database(this);
+		
+		LogUtil.log("Setting up the name generator...");
+		nameGenerator = new NameGenerator();
 		
 		// Register the message handlers
 		api.addMessageCreateListener(commandCenter);
@@ -130,5 +135,8 @@ public class AppleBot {
 	}
 	public Database getDatabase() {
 		return database;
+	}
+	public NameGenerator getNameGenerator() {
+		return nameGenerator;
 	}
 }
