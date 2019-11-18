@@ -20,6 +20,15 @@ public class RandomNameCommand extends Command {
 	public void execute(MessageCreateEvent event) {
 		String[] args = StringUtil.toArray(event.getMessageContent());
 		
+		if(args.length == 1) {
+			EmbedBuilder err = new EmbedBuilder();
+			err.setColor(Color.RED);
+			err.setTitle("There was a problem!");
+			err.setDescription("You didn't put in the required amount of arguments for this command! You were missing the Gender. (Male/Female) or (Boy/Girl)");
+			event.getChannel().sendMessage(err);
+			return;
+		}
+		
 		String gender = args[1];
 		Gender theGender = null;
 		
@@ -38,7 +47,7 @@ public class RandomNameCommand extends Command {
 		
 		EmbedBuilder embed = new EmbedBuilder();
 		
-		embed.setColor(Color.CYAN);
+		embed.setColor(theGender.getColor());
 		embed.setTitle("Your name is...");
 		embed.setDescription("Your chosen name for the " + theGender.getName() + " gender was " + name + "!");
 		
