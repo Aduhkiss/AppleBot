@@ -57,9 +57,8 @@ public class CommandCenter implements MessageCreateListener {
 		MessageAuthor user = event.getMessageAuthor();
 		
 		for(Command c : getCommands()) {
-			// There we go, I think I implemented a simple fix to not frick stuff up
-			// With the command detection system
-			if(input.startsWith(prefix + c.getName() + " ")) {
+			// No it caused more issues then it fixed
+			if(input.startsWith(prefix + c.getName())) {
 				LogUtil.logCommand(user.getName() + " executed command " + c.getName());
 				c.execute(event);
 			}
